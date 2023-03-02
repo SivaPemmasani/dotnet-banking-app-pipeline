@@ -8,13 +8,13 @@ phases:
   
   pre_build:
     commands:
-      - dotnet restore ApnaBank\ApnaBank.csproj
+      - dotnet restore ApnaBank\ApnaBank\ApnaBank.csproj
   build:
     commands:
-      - dotnet build ApnaBank\ApnaBank.csproj
+      - dotnet build ApnaBank\ApnaBank\ApnaBank.csproj
   post_build:
     commands:
-      - dotnet publish -c Release -o ./app/ ApnaBank\ApnaBank.csproj
+      - dotnet publish -c Release -o ./app/ ApnaBank\ApnaBank\ApnaBank.csproj
 artifacts:
   files:
     - '**/*'
