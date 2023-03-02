@@ -1,0 +1,20 @@
+version: 0.2
+
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 6.0
+  
+  pre_build:
+    commands:
+      - dotnet restore ApnaBank\ApnaBank.csproj
+  build:
+    commands:
+      - dotnet build ApnaBank\ApnaBank.csproj
+  post_build:
+    commands:
+      - dotnet publish -c Release -o ./app/ ApnaBank\ApnaBank.csproj
+artifacts:
+  files:
+    - '**/*'
