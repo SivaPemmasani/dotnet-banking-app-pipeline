@@ -25,7 +25,7 @@ jobs:
 
       # Restore dependencies
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore ApnaBank\ApnaBank\ApnaBank.csproj
 
       # Build the application
       - name: Build Application
