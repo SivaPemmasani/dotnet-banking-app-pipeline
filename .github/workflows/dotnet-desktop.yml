@@ -1,0 +1,36 @@
+name: Build and Test .NET Application
+
+on:
+  push:
+    branches:
+      - main  # Run the workflow on push to the main branch
+  pull_request:
+    branches:
+      - main  # Run the workflow on pull requests targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Setup .NET environment
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x  # Specify your .NET version (adjust as needed)
+
+      # Restore dependencies
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      # Build the application
+      - name: Build Application
+        run: dotnet build --no-restore --configuration Release
+
+      # Run Unit Tests (if available)
+      - name: Run Tests
+        run: dotnet test --no-build --verbosity normal
