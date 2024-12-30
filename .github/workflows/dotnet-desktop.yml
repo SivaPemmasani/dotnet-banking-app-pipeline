@@ -1,36 +1,37 @@
-name: Build and Test .NET Application
+name: Build and Publish .NET Application
 
 on:
   push:
     branches:
-      - master  # Run the workflow on push to the main branch
+      - master
   pull_request:
     branches:
-      - master  # Run the workflow on pull requests targeting the main branch
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Setup .NET environment
-      - name: Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.x  # Specify your .NET version (adjust as needed)
+          dotnet-version: 6.0
 
-      # Restore dependencies
       - name: Restore Dependencies
-        run: dotnet restore ApnaBank\ApnaBank\ApnaBank.csproj
+        run: dotnet restore ApnaBank/ApnaBank/ApnaBank.csproj
 
-      # Build the application
-      - name: Build Application
-        run: dotnet build --no-restore --configuration Release
+      - name: Build Solution
+        run: dotnet build ApnaBank/ApnaBank/ApnaBank.csproj --no-restore
 
-      # Run Unit Tests (if available)
-      - name: Run Tests
-        run: dotnet test --no-build --verbosity normal
+      - name: Publish Application
+        run: dotnet publish -c Release -o ./app/ ApnaBank/ApnaBank/ApnaBank.csproj
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-artifacts
+          path: app/
