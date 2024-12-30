@@ -3,10 +3,10 @@ name: Build and Test .NET Application
 on:
   push:
     branches:
-      - main  # Run the workflow on push to the main branch
+      - master  # Run the workflow on push to the main branch
   pull_request:
     branches:
-      - main  # Run the workflow on pull requests targeting the main branch
+      - master  # Run the workflow on pull requests targeting the main branch
 
 jobs:
   build:
